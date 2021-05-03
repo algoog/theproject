@@ -4,6 +4,7 @@ import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import Logo from "../Assets/img/logo.png";
 import Login from "./pages/Login";
 import Register from "./pages/Register";
+import Profilepage from "./pages/Profilepage";
 function App() {
   return (
     <div className="App">
@@ -11,6 +12,9 @@ function App() {
         <Switch>
           <Route path="/" exact>
             <Gig />
+          </Route>
+          <Route path="/profile" exact>
+            <Profilepage />
           </Route>
           <Route path="/auth/login" exact>
             <Login
