@@ -28,13 +28,13 @@ function Header() {
                 Why
                 </li>
                 </Link>
-                <Link className="auth-button">
+                <Link className="auth-button"to="/auth/login">
                 <li>
                     
                 Sign in
                 </li>
                 </Link>
-                <Link  className="auth-button auth-button-outline">
+                <Link  className="auth-button auth-button-outline"to="/auth/register">
                 <li>
                     
                 Join
