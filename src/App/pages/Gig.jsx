@@ -11,6 +11,7 @@ import { GigEvents } from '../../Assets/script/js/Events/gigs';
 function Gig() {
     useEffect(() => {
         GigEvents()
+        // fetch("")
     }, [])
     return (
         <div className="Gig">

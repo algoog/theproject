@@ -3,11 +3,16 @@ import Header from '../shared/Header'
 import Footer from '../shared/Footer'
 import '../../Assets/styles/css/profile.css'
 import {Link} from 'react-router-dom'
+import AddIcon from '@material-ui/icons/Add';
+import { IconButton } from '@material-ui/core'
+import GigForm from '../component/GigForm'
+
 function Profilepage() {
     return (
+        
         <div className="Profilepage">
             <Header/>
-
+            <GigForm/>
             <div className="profile-container">
                 <div className="profile-pic">
                     <p>AT</p>
@@ -70,6 +75,15 @@ function Profilepage() {
                            
                             
                         </div>
+                     
+                        <div className="button-wrapper">
+                        <IconButton onClick={e=>{
+                            document.querySelector(".GigForm").style.display="block"
+                        }}>
+                            <AddIcon/>
+                         </IconButton>
+                        
+                        </div>
                 </div>
                 <div className="receive-area">
                 <h2>Reveive</h2>
@@ -80,6 +94,15 @@ function Profilepage() {
                                     <h3>I will be your Painter</h3>
                                 </div>
                             </Link>
+                        </div>
+                      
+                        <div className="button-wrapper">
+                        <IconButton onClick={e=>{
+                            document.querySelector(".GigForm").style.display="block"
+                        }}>
+                            <AddIcon/>
+                         </IconButton>
+                        
                         </div>
                 </div>
             </div>

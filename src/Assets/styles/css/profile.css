@@ -98,3 +98,70 @@
   padding: 0.2rem 1rem;
   padding-bottom: 0.8rem;
 }
+.profile-container .button-wrapper {
+  display: flex;
+  justify-content: center;
+}
+.GigForm {
+  background-color: #fff;
+  position: fixed;
+  width: 50%;
+  left: 50%;
+  top: 80%;
+  transform: translate(-50%, -80%);
+  display: none;
+  z-index: 23;
+  padding: 3rem;
+  border-radius: 15px;
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
+}
+.GigForm label {
+  cursor: pointer;
+  display: inline-block;
+  margin-bottom: 5px;
+}
+.GigForm > * + * {
+  margin-top: 1rem;
+}
+.GigForm .input-wrapper input {
+  width: 100%;
+  border: 1px solid #ddd;
+  height: 35px;
+  padding: 1rem;
+  outline: none;
+  font-size: 15px;
+}
+.GigForm .input-wrapper textarea {
+  width: 100%;
+  border: 1px solid #ddd;
+  outline: none;
+  height: 200px;
+  padding: 0.5rem 1rem;
+  font-size: 14px;
+  font-family: "Poppins", arial;
+}
+.GigForm .file-input-wrapper {
+  margin-top: 1rem;
+}
+.GigForm .file-input-wrapper input {
+  display: none;
+}
+.GigForm .file-input-wrapper label {
+  display: flex;
+  margin-bottom: 0px;
+  align-items: center;
+}
+.GigForm .file-input-wrapper label p {
+  margin-left: 10px;
+}
+.GigForm .gig-create-button {
+  width: 30%;
+  height: 40px;
+  background-color: #2f3c7e;
+  color: #fff;
+  font-size: 15px;
+  border: none;
+  outline: none;
+  cursor: pointer;
+  border-radius: 99px;
+}

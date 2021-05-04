@@ -4,6 +4,9 @@ import "../../Assets/styles/css/login.css";
 import "../../Assets/styles/css/login-select.css";
 import CloseIcon from "@material-ui/icons/Close";
 import { Link, useParams ,useHistory} from "react-router-dom";
+import {
+  AxiosInstance
+} from '../../Lib/Axios/axios'
 
 function Login({ img, title, desc, mainheading }) {
   const {type}=useParams()
@@ -19,27 +22,29 @@ function Login({ img, title, desc, mainheading }) {
       email:Email,
       password:Password,
     }
-    // await AxiosInstance.post(`/${type}/auth/login`,UserData).then(res=>{
-    //   if(res.data['details']){
+    await AxiosInstance.post(`/login`,UserData).then(res=>{
+      console.log(res)
+      console.log(res.data)
+      if(res.data['error']){
     
-    //     setError(res.data['details'][0].message)
+        setError(res.data['error'])
       
-    // }else if (res.data['error']){
-    //   setError(res.data['error'])
+    }else if (res.data['error']){
+      setError(res.data['error'])
 
-    // }else{
-    //    setError(null)
-    //    setAuthToken(res.data['token'])
-    //   window.sessionStorage.setItem("Auth",res.data['token'])
-    //   console.log(res.data)
-    //   History.push("/")
-    // }
+    }else{
+       setError(null)
+       setAuthToken(res.data['token'])
+      window.sessionStorage.setItem("Auth",res.data['token'])
+      console.log(res.data)
+      History.push("/")
+    }
       
       
       
-    // }).catch(err=>{
-    //   setError(err.message)
-    // })
+    }).catch(err=>{
+      setError(err.message)
+    })
   }
   return (
     <div className="LoginSelect Login">

@@ -2,14 +2,14 @@ import React,{useState} from "react";
 import "../../Assets/styles/css/register.css";
 import { Link } from "react-router-dom";
 import ArrowBackIcon from "@material-ui/icons/ArrowBack";
-// import {AxiosInstance} from '../../../assets/script/js/axios/BaseAxios'
-// import {HandleMessages} from '../../../assets/script/js/Events/Auth/Register/Register'
+import {AxiosInstance} from '../../Lib/Axios/axios'
+import {HandleMessages} from '../../Assets/script/js/Auth/Register/Register'
 import {useParams} from 'react-router-dom'
 function Register() {
-  const {type}=useParams()
-  
+
   const [FirstName,setFirstName]=useState("")
   const [LastName,setLastName]=useState("")
+  const [username,setusername]=useState("")
   const [Email,setEmail]=useState("")
   const [Password,setPassword]=useState("")
   const [description,setdescription]=useState("")
@@ -21,58 +21,62 @@ function Register() {
     
 
 
-    // HandleMessages  (
-    //   ".SuccessMessage",
-    //   ".ErrorMessage",
-    //   "none",
-    //   "none"
-    // )
+    HandleMessages  (
+      ".SuccessMessage",
+      ".ErrorMessage",
+      "none",
+      "none"
+    )
 
 
     e.preventDefault()
     let UserData={
       firstname:FirstName,
       lastname:LastName,
+      username:username, 
       email:Email,
       password:Password,
       description:description,
+      languages:language,
+      skills:skills,
+      description:description
     }
-    
 
-    // await AxiosInstance.post(`/${type}/auth/register`,UserData)
-    // .then(res=>{
-    //   console.log(res.data)
+    await AxiosInstance.post(`/register`,UserData)
+    .then(res=>{
+      console.log(res.data)
+      console.log(res)
     
-    //   if(res.data['details']){
+      if(res.data['error']){
     
-    //     setError(res.data['details'][0].message)
-    //     HandleMessages  (
-    //         ".SuccessMessage",
-    //         ".ErrorMessage",
-    //         "none",
-    //         "block"
-    //       )
-    // }else{
-    //     HandleMessages  (
-    //         ".SuccessMessage",
-    //         ".ErrorMessage",
-    //         "block",
-    //         "none"
-    //       )
-    // }
-    // })
-    // .catch(err=>{
-    //   console.log(err)
+        setError(res.data['error'])
+        HandleMessages  (
+            ".SuccessMessage",
+            ".ErrorMessage",
+            "none",
+            "block"
+          )
+    }else{
+        HandleMessages  (
+            ".SuccessMessage",
+            ".ErrorMessage",
+            "block",
+            "none"
+          )
+    }
+    })
+    .catch(err=>{
+      console.log(err)
 
-    //   setError(err.message)
+      setError(err.message)
 
-    //   HandleMessages  (
-    //     ".SuccessMessage",
-    //     ".ErrorMessage",
-    //     "none",
-    //     "block"
-    //   )
-    // });
+      HandleMessages  (
+        ".SuccessMessage",
+        ".ErrorMessage",
+        "none",
+        "block"
+      )
+    });
   }
   return (
     <div className="CommonRegister">
@@ -95,6 +99,10 @@ function Register() {
           <div className="input-wrapper">
             <label>last name</label>
             <input type="text" onChange={e=>setLastName(e.target.value)} />
+          </div>
+          <div className="input-wrapper">
+            <label>username</label>
+            <input type="text" onChange={e=>setusername(e.target.value)} />
           </div>
           <div className="input-wrapper">
             <label>EMAIL ADDRESS</label>
