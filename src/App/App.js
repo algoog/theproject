@@ -5,13 +5,17 @@ import Logo from "../Assets/img/logo.png";
 import Login from "./pages/Login";
 import Register from "./pages/Register";
 import Profilepage from "./pages/Profilepage";
+import Discover from "./pages/Discover";
+import Main from "./pages/Main";
 function App() {
   return (
     <div className="App">
       <Router>
         <Switch>
           <Route path="/" exact>
-            <Gig />
+            {/* <Gig /> */}
+            {/* <Discover /> */}
+            <Main />
           </Route>
           <Route path="/profile" exact>
             <Profilepage />

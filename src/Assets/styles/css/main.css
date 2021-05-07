@@ -1,0 +1,184 @@
+.hero {
+  height: 500px;
+  background-image: linear-gradient(
+      to right,
+      rgba(0, 0, 0, 0.6),
+      rgba(0, 0, 0, 0.4),
+      rgba(0, 0, 0, 0.2)
+    ),
+    url("https://cdn.pixabay.com/photo/2016/01/19/17/53/writing-1149962_960_720.jpg");
+  background-size: cover;
+  background-position: center;
+}
+.hero-content {
+  width: 1200px;
+  margin: auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  color: #fff;
+  height: 100%;
+}
+.hero-content > h1 {
+  font-size: 3rem;
+  margin-bottom: 1rem;
+  text-transform: uppercase;
+}
+.hero-content form {
+  width: 500px;
+}
+.hero-content form > input[type="text"] {
+  width: 100%;
+  height: 45px;
+  padding: 0rem 1rem;
+  outline: none;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+}
+.hero-content form .search-button-wrapper {
+  display: flex;
+  align-items: center;
+  /* grid-template-columns: 1fr 1fr; */
+  /* grid-auto-rows: 50px; */
+  margin-top: 1.4rem;
+  /* grid-gap: 2rem; */
+}
+.hero-content form .search-button-wrapper input {
+  height: 100%;
+  background-color: #2f3c7e;
+  color: #fff;
+  border-radius: 99px;
+  border: none;
+  font-size: 16px;
+  width: 150px;
+  height: 50px;
+  outline: none;
+  cursor: pointer;
+  margin-right: 0.7rem;
+}
+.companies-wrapper {
+  width: 1200px;
+  margin: auto;
+  padding: 4rem 0rem;
+}
+
+.companies-wrapper .companies-reel {
+  display: flex;
+  align-items: center;
+  overflow: hidden;
+}
+.companies-wrapper .companies-reel .image-wrapper {
+  min-width: 250px;
+  text-align: center;
+}
+.discover-wrapper,
+.main-page-comments-wrapper,
+.news-wrapper,
+.how-to-use {
+  width: 1200px;
+  margin: auto;
+  padding: 4rem 0rem;
+}
+.discover-wrapper > h1 {
+  font-size: 2rem;
+  /* font-weight: 500; */
+  margin-top: 1.5rem;
+}
+
+.services-reel,
+.popular-reel,
+.comment-reel,
+.news-reel {
+  margin-top: 1.5rem;
+  display: flex;
+  align-items: flex-start;
+  flex-wrap: nowrap;
+  overflow: hidden;
+}
+.services-reel > * + *,
+.popular-reel > * + *,
+.comment-reel > * + * {
+  margin-left: 1rem;
+}
+.ProviderCard,
+.Main .comment {
+  min-width: 250px;
+  width: 250px;
+
+  border: 1px solid #ddd;
+}
+.Main .comment {
+  border: none;
+}
+.ProviderCard > img {
+  width: 100%;
+
+  object-fit: cover;
+  height: 150px;
+}
+.ProviderCard .bottom-area {
+  padding: 0.5rem 1rem;
+}
+.ProviderCard .presentation {
+  display: flex;
+  align-items: center;
+}
+.ProviderCard .presentation img,
+.comment img {
+  width: 40px;
+  height: 40px;
+  object-fit: cover;
+
+  border-radius: 50%;
+  margin-right: 5px;
+}
+.ProviderCard .presentation p {
+  font-weight: bold;
+  font-size: 14px;
+}
+.ProviderCard .bottom-area .description {
+  font-size: 14px;
+  margin-top: 1rem;
+  padding-bottom: 1rem;
+  color: rgb(56, 56, 56);
+  font-weight: 600;
+}
+.Main .comment {
+  display: flex;
+  align-items: flex-start;
+}
+.Main .comment .comment-presentation .comment-name {
+  font-size: 14px;
+  font-weight: 600;
+}
+.Main .comment .comment-presentation .pure-comment {
+  font-size: 12px;
+}
+.how-to-use {
+  border: 1px solid #ddd;
+  padding: 4rem 2rem;
+}
+.how-to-use > h1 {
+  margin-bottom: 1rem;
+}
+.how-to-use ul > * + * {
+  margin-top: 1rem;
+}
+.news-wrapper > h1 {
+  text-align: center;
+  margin-bottom: 2rem;
+}
+.news-reel .news {
+  display: grid;
+  min-width: 100%;
+  grid-template-columns: 1fr 1fr;
+  grid-auto-rows: 400px;
+}
+.news-reel .news img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.news-reel .news .presentation {
+  padding: 1rem 2rem;
+}
