@@ -8,7 +8,8 @@ const auth = require("../middlewares/auth");
 // How to image storage
 const storage = multer.diskStorage({
   destination: (req, file, cb) => {
-    cb(null, "./public/uploads");
+    cb(null, "../public/uploads");
+    // cb(null, "uploads");
   },
   filename: (req, file, cb) => {
     cb(
@@ -22,10 +23,13 @@ const upload = multer({ storage: storage });
 router.post("/create", [auth, upload.array("image", 4)], async (req, res) => {
   try {
     const img = req.files;
+    console.log(req.body);
+    console.log(req.files);
+
     let store = [];
     let object = {};
     for (let i = 0; i < img.length; i++) {
-      object.image = img[i].path;
+      object.image = img[i].filename;
       store.push(object);
     }
     const gig = new Gig({
@@ -36,6 +40,7 @@ router.post("/create", [auth, upload.array("image", 4)], async (req, res) => {
       ...(req.files && { images: store }),
     });
     const response = await gig.save();
+    console.log(response);
     res.status(201).json(response);
   } catch (error) {
     res.json({ error: error });
@@ -55,7 +60,7 @@ router.put(
       let store = [];
       let object = {};
       for (let i = 0; i < img.length; i++) {
-        object.image = img[i].path;
+        object.image = img[i].filename;
         store.push(object);
       }
 
@@ -70,7 +75,7 @@ router.put(
         let store = gig.images;
         let object = {};
         for (let i = 0; i < img.length; i++) {
-          object.image = img[i].path;
+          object.image = img[i].filename;
           store.push(object);
         }
         gig.images = store;

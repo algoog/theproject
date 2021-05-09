@@ -1,17 +1,25 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import Header from '../shared/Header'
 import ArrowBackIosIcon from '@material-ui/icons/ArrowBackIos';
 import ArrowForwardIosIcon from '@material-ui/icons/ArrowForwardIos';
 import GigProfilePic from '../../Assets/img/profile-pic.png'
 import Tournament from '../../Assets/img/Tournaments.png'
 import '../../Assets/styles/css/gig.css'
-import {Link} from 'react-router-dom'
+import {Link,useParams} from 'react-router-dom'
 import Footer from '../shared/Footer'
 import { GigEvents } from '../../Assets/script/js/Events/gigs';
+import {AxiosInstance} from '../../Lib/Axios/axios'
 function Gig() {
+    const {id}=useParams()
+    const [gigData,setGigData]=useState({})
     useEffect(() => {
         GigEvents()
-        // fetch("")
+        
+        AxiosInstance.get(`/gig/show/${id}`).then(res=>{
+            setGigData(res.data)
+          
+        
+        }).catch(err=>console.log(err))
     }, [])
     return (
         <div className="Gig">
@@ -26,6 +34,11 @@ function Gig() {
                
                </div>
 
+            
+               <p className="gig-title">
+                    {gigData['title']}
+                </p>
+
                <div className="profile-slider">
                 <span className="profile-siider-front-shade"></span>
                <div className="back-arrow-wrapper">
@@ -35,19 +48,19 @@ function Gig() {
                <ArrowForwardIosIcon className="forward-arrow"/>
                </div>
                    <div className="slider-reel">
-                       <img src="https://cdn.pixabay.com/photo/2020/08/17/13/24/flower-5495384_960_720.jpg" alt=""/>
+                 
+                       <img src={`../../uploads/${gigData['images']&&gigData['images'][0]['image']}`} alt=""/>
                    </div>  
                </div>
                <div className="images-container">
                        <div className="images-container-reel">
-                                <img src="https://cdn.pixabay.com/photo/2020/08/17/13/24/flower-5495384_960_720.jpg" alt=""/>
+                       <img src={`../../uploads/${gigData['images']&&gigData['images'][0]['image']}`} alt=""/>
                        </div>
                 </div>
 
 
                 <p className="description">
-                    
-Lorem ipsum dolor sit amet consectetur, adipisicing elit. Sit, unde! Corporis sint adipisci minima voluptatibus natus fugit, quo, ex qui officia architecto harum dolorum odio vero in autem, sed enim. Ipsam, odit vitae, itaque fuga culpa harum rem velit voluptate consequuntur placeat inventore officiis sunt dolore iure, corrupti ullam similique ad! Voluptates repellendus totam ratione corporis facere debitis explicabo molestiae laborum quaerat. Fugiat expedita quaerat, delectus ullam tenetur error provident, corrupti, natus architecto eum magni saepe laudantium! Facilis blanditiis, laboriosam accusamus amet veniam ab provident at vitae co
+                    {gigData['description']}
                 </p>
 
                 <Link className="gig-contact-button">

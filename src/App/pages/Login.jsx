@@ -1,4 +1,4 @@
-import React,{useState} from "react";
+import React,{useEffect, useState} from "react";
 
 import "../../Assets/styles/css/login.css";
 import "../../Assets/styles/css/login-select.css";
@@ -15,6 +15,26 @@ function Login({ img, title, desc, mainheading }) {
   const [AuthToken,setAuthToken]=useState("")
   const [Error,setError]=useState(null)
   const History=useHistory()
+  useEffect(() => {
+    let AuthToken = window.sessionStorage.getItem("Auth");
+
+    AxiosInstance.get(`show/${window.sessionStorage.getItem("user_id")}/`, {
+      headers: {
+        Authorization: `Bearer ${AuthToken}`,
+      },
+    })
+      .then((res) => {
+        if (res.data["name"] == "JsonWebTokenError") {
+        } else {
+          document.querySelectorAll(".auth-button").forEach((Each) => {
+            Each.style.display = "none";
+          });
+        }
+      })
+      .catch((err) => console.log(err));
+  }, []);
+
+
 
   const HandleLogin=async e=>{
     e.preventDefault()
@@ -36,6 +56,7 @@ function Login({ img, title, desc, mainheading }) {
        setError(null)
        setAuthToken(res.data['token'])
       window.sessionStorage.setItem("Auth",res.data['token'])
+      window.sessionStorage.setItem("user_id",res.data['user_Id'])
       console.log(res.data)
       History.push("/")
     }
@@ -45,6 +66,10 @@ function Login({ img, title, desc, mainheading }) {
     }).catch(err=>{
       setError(err.message)
     })
+
+
+
+
   }
   return (
     <div className="LoginSelect Login">

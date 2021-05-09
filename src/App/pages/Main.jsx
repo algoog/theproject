@@ -13,7 +13,14 @@ import Comment from '../component/Comment'
 import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
 import ChevronRightIcon from '@material-ui/icons/ChevronRight';
 import { HandleHomeEvents } from '../../Assets/script/js/Events/Main'
+import SearchIcon from '@material-ui/icons/Search';
 import axios from 'axios'
+
+import AppleIcon from '@material-ui/icons/Apple';
+import ShopIcon from '@material-ui/icons/Shop';
+
+
+import {Link} from 'react-router-dom'
 function Main() {
     const [Gigs,setGigs]=useState([])
     const [providers,setProviders]=useState([])
@@ -37,9 +44,13 @@ function Main() {
             <Header/>
             <div className="hero">
                 <div className="hero-content">
-                    <h1>The pigeon</h1>
+                   
+                    <h1>search with pigeon</h1>
                     <form>
-                        <input type="text" placeholder="Search"/>
+                       <div className="search-wrapper">
+                       <SearchIcon/>
+                       <input type="text" placeholder="Search"/>
+                       </div>
                         <div className="search-button-wrapper">
                             <input type="submit" value="Search" />
                             <input type="submit" value="Drive Now" />
@@ -49,6 +60,8 @@ function Main() {
             </div>
 
             <div className="companies-wrapper">
+                <div className="reel-container">
+                <ChevronLeftIcon className="left-arrow-icon companies-left-arrow"/>
                 <div className="companies-reel">
                     <div class="image-wrapper">
                         <img src={
@@ -67,7 +80,16 @@ function Main() {
                     <div class="image-wrapper">
                         <img src={Client5} alt=""/>
                     </div>
+                    <div class="image-wrapper">
+                        <img src={Client2} alt=""/>
+                    </div>
+                    <div class="image-wrapper">
+                        <img src={Client3} alt=""/>
+                    </div>
                 </div>
+                <ChevronRightIcon className="right-arrow-icon companies-right-arrow"/>
+                </div>
+              
             </div>
 
 
@@ -79,8 +101,8 @@ function Main() {
                    <ChevronLeftIcon className="left-arrow-icon service-left-arrow"/>
                     <div className="services-reel">
                     {
-                        providers.map(provider=>(
-<ProviderCard title={provider.title}/>
+                        Gigs.map(gig=>(
+                            <ProviderCard title={gig.title} path="./uploads/" img={gig['images'][0]['image']}  id={gig._id} key={gig._id}/>
                         ))
                     }
                     
@@ -98,8 +120,8 @@ function Main() {
                
                 <div className="popular-reel">
                 {
-                        recceivers.map(recceiver=>(
-<ProviderCard title={recceiver.title}/>
+                        Gigs.map(gig=>(
+<ProviderCard title={gig.title} path="./uploads/" img={gig['images'][0]['image']} id={gig._id} key={gig._id}/>
                         ))
                     }
                    
@@ -129,7 +151,7 @@ function Main() {
             <div className="news-wrapper">
                 <h1>News</h1>
               <div className="reel-container">
-              <ChevronLeftIcon className="left-arrow-icon"/>
+              <ChevronLeftIcon className="left-arrow-icon news-left-arrow"/>
   
               <div className="news-reel">
                     <div className="news">
@@ -150,7 +172,7 @@ function Main() {
 
                 </div>
 
-                <ChevronRightIcon className="right-arrow-icon"/>
+                <ChevronRightIcon className="right-arrow-icon news-right-arrow"/>
               </div>
             </div>
 
@@ -166,9 +188,22 @@ function Main() {
             </div>
 
 
-            {/* <div className="main-find-us-section">
+           <div className="main-find-us-container">
+               <h1>Find us now</h1>
+           <div className="main-find-us-section">
+                <Link className="AppleLink">
+                <AppleIcon/>
+                App Store
+                  
 
-            </div> */}
+                </Link> 
+                <Link className="PlayStoreLink">
+                    <ShopIcon/>
+                
+                    Play Store
+                </Link>
+            </div>
+           </div>
             <Footer/>
         </div>
     )

@@ -2,22 +2,57 @@ import React, { useEffect, useState } from 'react'
 import Header from '../shared/Header'
 import Footer from '../shared/Footer'
 import '../../Assets/styles/css/profile.css'
-import {Link} from 'react-router-dom'
+import {Link,useHistory} from 'react-router-dom'
 import AddIcon from '@material-ui/icons/Add';
 import { IconButton } from '@material-ui/core'
 import GigForm from '../component/GigForm'
-import axios from 'axios'
+
+import {AxiosInstance} from '../../Lib/Axios/axios'
 function Profilepage() {
-    const [Gigs,setGigs]=useState([])
+    const History=useHistory()
     const [providers,setProviders]=useState([])
     const [recceivers,setReceivers]=useState([])
+    const [UserInfo,setUserInfo]=useState({})
 
     useEffect(()=>{
-        axios.get("http://localhost:4000/api/gig/show").then(res=>{
-            setGigs(res.data)
-            setProviders( res.data.filter(data=>data.role=="provider"))
-            setReceivers( res.data.filter(data=>data.role=="receiver"))
+        let AuthToken=window.sessionStorage.getItem("Auth")
+        
+        AxiosInstance.get(`show/${window.sessionStorage.getItem("user_id")}/`,{
+            headers: {
+                Authorization: `Bearer ${AuthToken}`,
+              }
+        }).then(res=>{
+            if(res.data['name']=="JsonWebTokenError"){
+                History.push("/")
+            }
             console.log(res.data)
+            setUserInfo(res.data)
+        }).catch(err=>console.log(err))
+
+
+        AxiosInstance.get("gig/show/").then(res=>{
+            let User=window.sessionStorage.getItem("user_id")
+    
+
+            setProviders( res.data.filter(data=>{
+                if(data.role=="provider"&&data.user==User){
+                    return 1
+                }else{
+                    return 0
+                }
+            }))
+
+
+            setReceivers( res.data.filter(data=>{
+             
+                if(data.role=="receiver"&&data.user==User){
+                    return 1
+                }else{
+                    return 0
+                }
+          
+            }))
+           
         }).catch(err=>console.log(err))
     },[])
 
@@ -39,22 +74,20 @@ function Profilepage() {
                     <div className="presentation-wrapper">
                         <h3>Description</h3>
                         <p>
-                        Notice the use of %PUBLIC_URL% in the tags above.
-                        It will be replaced with the URL of the `public` folder during the build.
-                        Only files inside the `public` folder can be referenced from the HTML.
+                        {UserInfo['description']}
                         </p>
                     </div>
                     <div className="presentation-wrapper">
                         <h3>Languages</h3>
                         <p>
-                       I know English And Urdu
+                       {UserInfo['languages']}
                         </p>
                     </div>
 
                     <div className="presentation-wrapper">
                         <h3>Skills</h3>
                         <p>
-                            I know HTML, CSS and JAVASCRIPT
+                        {UserInfo['skills']}
                         </p>
                     </div>
 
@@ -77,16 +110,16 @@ function Profilepage() {
                     
                 </div>
                 <div className="provider-area">
-                        <h2>Provide</h2>
+                        <h2>Provider</h2>
                         <div className="providers-collection">
 {
 providers.map(Gig=>(
 
 
 
-    <Link to="/">
+    <Link to={`/services/${Gig._id}`}>
         <div className="provider">
-            <img src="https://cdn.pixabay.com/photo/2020/04/16/09/57/watercolor-5049980_960_720.jpg" alt=""/>
+            <img src={`../uploads/${Gig['images']&&Gig['images'][0]['image']}`} alt=""/>
             <h3>{Gig.title}</h3>
           </div>    
     </Link>
@@ -108,16 +141,16 @@ providers.map(Gig=>(
                         </div>
                 </div>
                 <div className="receive-area">
-                <h2>Reveive</h2>
+                <h2>Reveiver</h2>
                         <div className="reveivers-collection">
                         {
 recceivers.map(Gig=>(
 // const [providers,setProviders]=useState([])
 
 
-    <Link to="/">
+    <Link to={`/services/${Gig._id}`}>
         <div className="provider">
-            <img src="https://cdn.pixabay.com/photo/2020/04/16/09/57/watercolor-5049980_960_720.jpg" alt=""/>
+            <img src={`../uploads/${Gig['images']&&Gig['images'][0]['image']}`} alt=""/>
             <h3>{Gig.title}</h3>
           </div>    
     </Link>

@@ -24,11 +24,36 @@ nav {
   color: #2f3c7e;
   transition: 0.3s ease all;
 }
+.header-content nav li {
+  position: relative;
+}
+.header-content .discover-drop-down {
+  position: absolute;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  left: 50%;
+  transform: translateX(-50%);
+  top: 130%;
+  background-color: #fff;
+  width: 200px;
+  padding: 1.5rem;
+  border-radius: 15px;
+  box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.2);
+  display: none;
+}
+.header-content .discover-drop-down a {
+  color: #000;
+  font-size: 15px;
+}
+.header-content .discover-drop-down.active-drop-down {
+  display: flex;
+}
 .header-content nav * + * {
   margin-left: 2rem;
 }
 .header-content nav *:hover {
-  transform: scale(1.1);
+  /* transform: scale(1.1); */
 }
 .header-content nav * + *:last-child {
   margin-left: 10px;

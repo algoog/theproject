@@ -21,6 +21,10 @@
   margin-left: 0.7rem;
   font-weight: 600;
 }
+.gig-title {
+  margin-top: 0.7rem;
+  font-weight: 600;
+}
 .gig-body .profile-slider {
   margin-top: 1rem;
   position: relative;
@@ -72,6 +76,7 @@
 }
 .gig-body .images-container .images-container-reel img {
   width: 80px;
+  object-fit: cover;
   height: 80px;
 }
 .gig-body .description {

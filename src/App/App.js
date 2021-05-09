@@ -7,15 +7,19 @@ import Register from "./pages/Register";
 import Profilepage from "./pages/Profilepage";
 import Discover from "./pages/Discover";
 import Main from "./pages/Main";
+import { AxiosInstance } from "../Lib/Axios/axios";
+import { useEffect } from "react";
 function App() {
   return (
     <div className="App">
       <Router>
         <Switch>
           <Route path="/" exact>
-            {/* <Gig /> */}
-            {/* <Discover /> */}
             <Main />
+          </Route>
+          <Route path="/services/:id" exact>
+            <Gig />
+            {/* <Discover /> */}
           </Route>
           <Route path="/profile" exact>
             <Profilepage />
