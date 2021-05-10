@@ -19,7 +19,9 @@ function App() {
           </Route>
           <Route path="/services/:id" exact>
             <Gig />
-            {/* <Discover /> */}
+          </Route>
+          <Route path="/discover/service/:type" exact>
+            <Discover />
           </Route>
           <Route path="/profile" exact>
             <Profilepage />
