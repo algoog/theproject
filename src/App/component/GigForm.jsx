@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import PublishIcon from "@material-ui/icons/Publish";
-import axios from "axios";
+import {AxiosInstance} from '../../Lib/Axios/axios'
 function GigForm() {
   const [Title, setTitle] = useState("");
   const [Description, setdescription] = useState("");
@@ -9,7 +9,7 @@ function GigForm() {
  
   const HandleSubmit = (e) => {
     e.preventDefault();
-    console.log(Role);
+  
     let formdata = new FormData();
     formdata.append("title", Title);
     formdata.append("description", Description);
@@ -23,11 +23,11 @@ function GigForm() {
     } else {
       formdata.append("image", file);
     }
-
-    axios
-      .post("http://localhost:4000/api/gig/create", formdata, {
+    let AuthToken = window.sessionStorage.getItem("Auth");
+    AxiosInstance
+      .post("gig/create", formdata, {
         headers: {
-          Authorization: `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYwOTY3NDAxYTFkYjBkMjFlMDU0OTRlNyIsImlhdCI6MTYyMDQ3Mjg3MSwiZXhwIjoxNjIxMzM2ODcxfQ.W-UJQsZRlL8CzYYbQBEpduyRulXljVl129LGWuHCkSw`,
+          Authorization: `Bearer ${AuthToken}`,
         },
       })
       .then((res) => {

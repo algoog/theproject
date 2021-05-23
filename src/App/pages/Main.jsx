@@ -14,11 +14,9 @@ import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
 import ChevronRightIcon from '@material-ui/icons/ChevronRight';
 import { HandleHomeEvents } from '../../Assets/script/js/Events/Main'
 import SearchIcon from '@material-ui/icons/Search';
-import axios from 'axios'
-
 import AppleIcon from '@material-ui/icons/Apple';
 import ShopIcon from '@material-ui/icons/Shop';
-
+import {AxiosInstance} from '../../Lib/Axios/axios'
 
 import {Link} from 'react-router-dom'
 function Main() {
@@ -27,7 +25,7 @@ function Main() {
     const [recceivers,setReceivers]=useState([])
 
     useEffect(()=>{
-        axios.get("http://localhost:4000/api/gig/show").then(res=>{
+        AxiosInstance.get("gig/show").then(res=>{
             setGigs(res.data)
             setProviders( res.data.filter(data=>data.role=="provider"))
             setReceivers( res.data.filter(data=>data.role=="receiver"))

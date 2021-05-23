@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import ProviderCard from '../component/ProviderCard'
-import axios from 'axios'
+
 import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
 import ChevronRightIcon from '@material-ui/icons/ChevronRight';
 import '../../Assets/styles/css/discover.css'
@@ -8,12 +8,13 @@ import { HandleDiscoverEvents } from '../../Assets/script/js/Events/Discover';
 import Header from '../shared/Header';
 import Footer from '../shared/Footer';
 import {useParams} from 'react-router-dom'
+import {AxiosInstance} from '../../Lib/Axios/axios'
 function Discover() {
     const {type} =useParams()
     const [Gigs,setGigs]=useState([])
     
     useEffect(()=>{
-        axios.get("http://localhost:4000/api/gig/show").then(res=>{
+        AxiosInstance.get("gig/show").then(res=>{
             
             setGigs( res.data.filter(data=>data.role==`${type}`))
           
